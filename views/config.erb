@@ -1,0 +1,128 @@
+<html>
+	<head>
+		<title>MATADO - CONFIGURACION</title>
+		<link rel="stylesheet" type="text/css" href="/matado.css"/>
+		<script type="text/javascript">
+			function emptyWordToPlayBox()
+			{	if(jugar.wordToPlay.value == "")
+				{	return true;
+				}
+				return false;
+			}
+			function validateWTP()
+			{	if(emptyWordToPlayBox())
+				{	alert("ERROR! - No se ingresó ninguna palabra para jugar");
+					return false;
+				}
+				return true;
+			}
+			function emptyWordToAddBox()
+			{	if(listar.wordToAdd.value == "")
+				{	return true;
+				}
+				return false;
+			}
+			function validateWTA()
+			{	if(emptyWordToAddBox())
+				{	alert("ERROR! - No se ingresó ninguna palabra para agregar");
+					return false;
+				}
+				return true;
+			}
+			function emptyWordToDeleteBox()
+			{	if(eliminar.wordToDelete.value == "")
+				{	return true;
+				}
+				return false;
+			}
+			function validateWTD()
+			{	if(emptyWordToDeleteBox())
+				{	alert("ERROR! - No se selecciono ninguna palabra para eliminar de la lista");
+					return false;
+				}
+				return true;
+			}
+			function getSelected()
+			{	eliminar.wordToDelete.value = document.getElementById('wordsList').value;
+			}
+		</script>
+	</head>
+	<body>
+		<table class="cont" border="1"><tr><td class="ctralign">
+			<table class="cont">
+				<tr>
+					<td class="ctralign" colspan="5">
+						<header>MODO DE CONFIGURACION</header>
+					</td>
+				</tr>
+				<tr>
+					<td class="ctralign" colspan="5">
+						<form name="jugar" action="/game" OnSubmit="return validateWTP()" method="POST">
+							<txt>INGRESE UNA PALABRA PARA JUGAR&nbsp;</txt>
+							<input type="text" name="wordToPlay">
+							<input type="submit" value="JUGAR">
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td class="ctralign" colspan="5">
+						<form name="listar" action="/config" OnSubmit="return validateWTA()" method="POST">
+							<txt>INGRESE UNA PALABRA PARA AGREGAR A LA LISTA&nbsp;</txt>
+							<input type="text" name="wordToAdd">
+							<input type="submit" value="AGREGAR">
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td class="ctralign" width="20%">&nbsp;</td>
+					<td class="ctralign" width="20%"><txt>LISTA DE PALABRAS:</txt></td>
+					<td class="ctralign" width="20%">
+						<txt><%=@WLMessage%></txt>
+						<select id="wordsList" size="10" onclick="getSelected()" style="<%=@hideWordsList%>">
+							<%	@WordsList.each { |auxWordsList|  %>
+							<option value="<%=auxWordsList%>"><%=auxWordsList%></option> 
+							<%	} %>
+						</select>
+					</td>
+					<td class="ctralign" width="20%">
+						<form action="/game" method="POST">
+							<input type="submit" value="JUGAR CON LISTA" <%=@disableButton%>>
+							<input type="text" name="wordToPlay" value="<%=@randomWordToPlay%>" style="visibility:hidden;display:none;">
+						</form>
+						<form name="eliminar" action="/config" OnSubmit="return validateWTD()" method="POST">
+							<input type="text" name="wordToDelete" style="visibility:hidden;display:none;">
+							<input type="submit" value="BORRAR PALABRA">
+						</form>
+						<form name="guardar" action="/config" method="POST">
+							<input type="text" name="saveFile" value="Y" style="visibility:hidden;display:none;">
+							<input type="submit" value="GUARDAR CAMBIOS">
+						</form>
+					</td>
+					<td class="ctralign" width="20%">&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="ctralign">&nbsp;</td>
+					<td class="ctralign">
+						<form action="/" method="POST">
+							<input type="submit" value="VOLVER AL INICIO">
+						</form>
+					</td>
+					<td class="ctralign">&nbsp;</td>
+					<td class="ctralign">
+						<form action="/bye" method="POST">
+							<input type="submit" value="SALIR DEL JUEGO">
+						</form>
+					</td>
+					<td class="ctralign">&nbsp;</td>
+				</tr>
+				<tr>
+					<td class="ctralign" colspan="5">
+						<msg><%=@configMessage%></msg>&nbsp;
+					</td>
+				</tr>
+			</table>
+		</td></tr></table>
+	</body>
+</html>
+
+

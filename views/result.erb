@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<title>MATADO - RESULTADO</title>
+		<link rel="stylesheet" type="text/css" href="/matado.css"/>
+	</head>
+	<body>
+		<table class="cont" border="1"><tr><td class="ctralign">
+			<table class="cont">
+				<tr>
+					<td class="ctralign" colspan="2">
+						<header><%=@resultMessage%></header>
+					</td>
+				</tr>
+				<tr>
+					<td class="ctralign" width="350px"><img border="1" src="<%=@statusImage%>"/></td>
+					<td class="ctralign">
+						<txt>LA PALABRA SECRETA ERA: <%=@secretWord.to_s%></txt>
+					</td>
+				<tr>
+					<td class="ctralign" colspan="2">
+						<table width="100%" border="0">
+							<tr>
+								<td class="ctralign" width="33%">
+									<form action="/" method="POST">
+										<input type="submit" value="VOLVER AL INICIO">
+									</form>
+								</td>
+								<td class="ctralign">
+									<form action="/game" method="POST">
+										<input type="submit" value="JUGAR NUEVAMENTE" <%=@disableButton%>>
+										<input type="text" name="wordToPlay" value="<%=@randomWordToPlay%>" style="visibility:hidden;display:none;">
+									</form>
+								</td>
+								<td class="ctralign" width="33%">
+									<form action="/bye" method="POST">
+										<input type="submit" value="SALIR DEL JUEGO">
+									</form>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td></tr></table>
+	</body>
+</html>
+

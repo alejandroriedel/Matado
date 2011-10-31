@@ -1,0 +1,121 @@
+<html>
+	<head>
+		<title>MATADO - JUEGO</title>
+		<link rel="stylesheet" type="text/css" href="/matado.css"/>
+		<script type="text/javascript">
+			function emptyletterAttemptBox()
+			{	if(intentar.letterAttempt.value == "")
+				{	return true;
+				}
+				return false;
+			}
+			function validateLA()
+			{	if(emptyletterAttemptBox())
+				{	alert("ERROR! - No se ingresó ninguna letra");
+					return false;
+				}
+				return true;
+			}
+			function emptyWordAttemptBox()
+			{	if(adivinar.wordAttempt.value == "")
+				{	return true;
+				}
+				return false;
+			}
+			function validateWA()
+			{	if(emptyWordAttemptBox())
+				{	alert("ERROR! - No se ingresó ninguna palabra");
+					return false;
+				}
+				return true;
+			}
+			function DispCenterAlert(id,top)
+			{	//centerPosition = (window.screen.availWidth-1000)/2;	//screen width
+				centerPosition = (window.innerWidth / 2);			//browser width
+				document.getElementById(id).style.left=(centerPosition - 145)+'px';
+				document.getElementById(id).style.top=top+'px';
+				document.getElementById(id).style.display='block';
+			}
+		</script>
+	</head>
+	<body>
+		<table class="cont" border="1"><tr><td class="ctralign">
+			<table class="cont">
+				<tr>
+					<td class="ctralign" colspan="3">
+						<header>BUENAS <%=@playerName%></header>
+					</td>
+				</tr>
+				<tr>
+					<td class="ctralign" rowspan="4" width="350px"><img border="1" src="<%=@statusImage%>"/></td>
+					<td class="ctralign" colspan="2">
+						<div id="container" onmouseover="DispCenterAlert('AlertBox',65);">
+							<iframe src="<%=@searchUrl%>"></iframe>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="ctralign" colspan="3">
+						<SecWord><%=@codedWord.join(" ")%></SecWord>
+					</td>
+				</tr>
+				<tr>
+					<td class="ctralign" colspan="3">
+						<form name="intentar" action='/game' OnSubmit="return validateLA()" method="POST">
+							<txt>INGRESE UNA LETRA&nbsp;</txt>
+							<input type="text" name="letterAttempt" maxlength="1">
+							<input type="submit" value="INTENTAR">
+						</form>
+						<form name="adivinar" action='/game' OnSubmit="return validateWA()" method="POST">
+							<txt>INGRESE LA PALABRA&nbsp;</txt>
+							<input type="text" name="wordAttempt">
+							<input type="submit" value="ARRIESGAR">
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td class="ctralign">
+						<table border="0" width="100%">
+							<tr>
+								<td class="ctralign" width="50%">
+									<txt>LETRAS ERRONEAS: <%=@errorsList.join(",")%></txt>
+								</td>
+								<td class="ctralign">
+									<txt>INTENTOS: <%=@failedAttempts%>/<%=@maxAttempts%></txt>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>	
+				<tr>
+					<td class="ctralign" colspan="3">
+						<msg><%=@gameMessage%></msg>&nbsp;
+					</td>
+				</tr>
+				<tr>
+					<td class="ctralign" colspan="2">
+						<table width="100%">
+							<tr>
+								<td class="ctralign" width="50%">
+									<form action="/bye" method="POST">
+										<input type="submit" value="SALIR DEL JUEGO">
+									</form>
+								</td>
+								<td class="ctralign">
+									<form action="/" method="POST">
+										<input type="submit" value="VOLVER AL INICIO">
+									</form>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td></tr></table>
+		<div id="AlertBox" class="alert" onmouseout="document.getElementById('AlertBox').style.display='none'">
+			<table height="100%" width="100%" align="center">
+<!--				<tr ><td class="ctralign"><msgImp>NO HAGAS TRAMPA <%=@playerName%>!!!<br><br>(-_-)</msgImp></td></tr> -->
+			</table>
+		</div>
+	</body>
+</html>

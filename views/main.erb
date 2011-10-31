@@ -1,0 +1,123 @@
+<html>
+	<head>
+		<title>MATADO - INICIO</title>
+		<link rel="stylesheet" type="text/css" href="/matado.css"/>
+		<script type="text/javascript">
+			function DispCenterAlert(id,top)
+			{	//centerPosition = (window.screen.availWidth-1000)/2;	//screen width
+				centerPosition = (window.innerWidth-500)/2;			//browser width
+				document.getElementById(id).style.left=centerPosition+'px';
+				document.getElementById(id).style.top=top+'px';
+				document.getElementById(id).style.display='block';
+			}
+		</script>
+	</head>
+	<body>
+		<table class="cont" border="1"><tr><td class="ctralign">
+			<table class="cont">
+				<tr>
+					<td class="ctralign" colspan="2"><header>BIENVENIDO AL MATADO</header></td>
+				</tr>
+				<tr>
+					<td class="ctralign" colspan="2">
+						<txt>ESTE JUEGO ES SIMILAR A UN AHORCADO, PERO EN VEZ DE ADIVINAR UNO DEBE COMPLETAR LAS PALABRAS QUE SE MUESTRAN EN LA FIGURA. FUE DESARROLLADO CUANDO MI HIJA MAYOR COMENZO LA PRIMARIA, PARA AYUDARLA A APRENDER A ESCRIBIR AL MISMO TIEMPO QUE SE DIVERTIA.</txt>
+					</td>
+				</tr>
+				<tr>
+					<td class="ctralign" colspan="2">
+						<txt>EL JUEGO LE DEBE SU NOMBRE A UNO DE ESOS ERRORES TAN LINDOS QUE COMETEN LOS CHICOS CUANDO COMIENZAN A HABLAR. "PAPA, MIRA, ESTOY MATADA" DECIA JUGANDO A HACERSE LA MUERTA, CONVIRTIENDO EL TERMINO "MATADO" EN ALGO COTIDIANO PARA NUESTRA FAMILIA</txt>
+					</td>
+				</tr>
+				<tr>
+					<td class="ctralign" colspan="2">
+						<div style="<%=@setNameVisibility%>">
+							<form action="/" method="POST">
+								<txt>INGRESE SU NOMBRE:&nbsp;</txt>
+								<input type="text" name="playerName">
+								<input type="submit" value="INGRESAR">
+							</form>
+						</div>
+						<div style="<%=@changeNameVisibility%>">
+							<form action="/" method="POST">
+								<txt>SI NO SOS <%=@playerName%></txt>
+								<input type="text" name="changeName" value="Y" style="visibility:hidden;display:none;">
+								<input type="submit" value="CAMBIAR JUGADOR">								
+							</form>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class="ctralign" width="50%">
+						<form action="/config" method="POST">
+							<input type="submit" value="CONFIGURAR">
+						</form>
+					</td>
+					<td class="ctralign" width="50%">
+						<form action="/game" method="POST">
+							<input type="submit" value="JUGAR" <%=@disableButton%>>
+							<input type="text" name="wordToPlay" value="<%=@randomWordToPlay%>" style="visibility:hidden;display:none;">
+						</form>
+					</td>
+				</tr>
+				<tr>
+					<td class="ctralign" colspan="2">
+						<msg><%=@mainMessage%></msg>&nbsp;
+					</td>
+				</tr>
+				<tr>
+					<td class="ctralign" colspan="2">
+						<note>NOTA: SI DESEA JUGAR SIN IR A LA CONFIGURACION, SE ELEGIRA UNA PALABRA AL AZAR DE LAS DISPONIBLES</note>
+					</td>
+				</tr>
+				<tr>
+					<td class="ctralign" colspan="2">
+						<input type="button" name="ACERCADE" value="ACERCA DE..." onclick="DispCenterAlert('AlertBox',150);">
+					</td>
+				</tr>
+				
+			</table>
+		</td></tr></table>
+	</body>
+	<div id="AlertBox" class="about">
+		<table width="100%" height="100%" align="center">
+			<tr><td class="ctralign" colspan="2"><helpTitle>ACERCA DEL MATADO</helpTitle></td></tr>
+			<tr><td class="ctralign" colspan="2">&nbsp;</td></tr>
+			<tr>
+				<td width="5%">&nbsp;</th>
+				<td class="lftalign">
+					<txt>Desarrollado por Menfiesto, Junio de 2011<br><br>Contactos:<br></txt>
+					<table>
+						<tr>
+							<td width="20px"></td>
+							<td class="lftalign"><txt>- Email:</txt></td>
+							<td class="lftalign"><txt>menfiesto@gmail.com</txt></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="lftalign"><txt>- Twitter:</txt></td>
+							<td class="lftalign"><txt>@Menfiesto</txt></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="lftalign"><txt>- Blog:</txt></td>
+							<td class="lftalign"><txt>http://menfiesto.blogspot.com</txt></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td class="lftalign"><txt>- GitHub:</txt></td>
+							<td class="lftalign"><txt>https://github.com/Menfiesto</txt></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr><td class="ctralign" colspan="2">&nbsp;</td></tr>
+			<tr>
+				<td class="ctralign" colspan="2">
+					<form>
+						<input type="button" value="OK" style="width:75px;" onclick="document.getElementById('AlertBox').style.display='none'">
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
+</html>
